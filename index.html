@@ -18,7 +18,15 @@
   <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<style>
+<style>.card {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 50px rgba(0,0,0,.35);
+}
+
 :root {
   --bg1:#6a11cb; --bg2:#2575fc;
   --card:rgba(255,255,255,.15);
