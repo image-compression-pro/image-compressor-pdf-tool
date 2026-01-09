@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- SEO META TAGS -->
+  <title>Online Image Compressor & PDF Converter Tool</title>
+  <meta name="description" content="Free online image compression and image to PDF converter tool. Compress images without losing quality and convert images to PDF instantly.">
+  <meta name="keywords" content="image compressor, compress image online, image to pdf, pdf converter, optimize images">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+
+  <!-- PERFORMANCE -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- GOOGLE ADSENSE (Replace AD_CLIENT_ID) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f6f8;
+  color: #333;
+}
+
+header {
+  background: #1e88e5;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+.main {
+  flex: 3;
+  padding: 15px;
+}
+
+.sidebar {
+  flex: 1;
+  padding: 15px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+input[type="file"] {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+button {
+  background: #1e88e5;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #1565c0;
+}
+
+.ad-box {
+  background: #e0e0e0;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #222;
+  color: #ccc;
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Image Compressor & PDF Converter</h1>
+  <p>Compress images & convert them into PDF instantly</p>
+</header>
+
+<!-- TOP AD -->
+<div class="ad-box">
+  <!-- AdSense Top Banner -->
+  <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="container">
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- IMAGE COMPRESSION -->
+    <div class="card">
+      <h2>Image Compression Tool</h2>
+      <input type="file" id="imageInput" accept="image/*">
+      <label>Compression Level: <span id="qualityValue">70%</span></label>
+      <input type="range" min="10" max="100" value="70" id="qualityRange">
+      <button onclick="compressImage()">Compress Image</button>
+      <p id="result"></p>
+      <a id="downloadLink" style="display:none;" download="compressed.jpg">Download Compressed Image</a>
+    </div>
+
+    <!-- IMAGE TO PDF -->
+    <div class="card">
+      <h2>Image to PDF Converter</h2>
+      <input type="file" id="pdfImages" accept="image/*" multiple>
+      <button onclick="convertToPDF()">Convert to PDF</button>
+    </div>
+
+    <!-- BOTTOM AD -->
+    <div class="ad-box">
+      <!-- AdSense Bottom Banner -->
+      <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="0987654321"
+         data-ad-format="auto"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="ad-box">
+      <!-- Sidebar Ad -->
+      <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="1122334455"
+         data-ad-format="auto"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </aside>
+
+</div>
+
+<footer>
+  © 2026 Image Compressor Tool | Fast • Secure • SEO Optimized
+</footer>
+
+<script>
+const qualityRange = document.getElementById("qualityRange");
+const qualityValue = document.getElementById("qualityValue");
+
+qualityRange.oninput = () => {
+  qualityValue.textContent = qualityRange.value + "%";
+};
+
+function compressImage() {
+  const file = document.getElementById("imageInput").files[0];
+  if (!file) return alert("Please select an image");
+
+  const img = new Image();
+  const reader = new FileReader();
+
+  reader.onload = e => img.src = e.target.result;
+  reader.readAsDataURL(file);
+
+  img.onload = () => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+
+    const quality = qualityRange.value / 100;
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const link = document.getElementById("downloadLink");
+      link.href = url;
+      link.style.display = "inline-block";
+      document.getElementById("result").textContent =
+        `Original: ${(file.size/1024).toFixed(2)} KB | Compressed: ${(blob.size/1024).toFixed(2)} KB`;
+    }, "image/jpeg", quality);
+  };
+}
+
+async function convertToPDF() {
+  const files = document.getElementById("pdfImages").files;
+  if (files.length === 0) return alert("Select images");
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
+
+  for (let i = 0; i < files.length; i++) {
+    const imgData = await fileToDataURL(files[i]);
+    if (i > 0) pdf.addPage();
+    pdf.addImage(imgData, "JPEG", 10, 10, 190, 260);
+  }
+
+  pdf.save("images.pdf");
+}
+
+function fileToDataURL(file) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.readAsDataURL(file);
+  });
+}
+</script>
+
+</body>
+</html>
