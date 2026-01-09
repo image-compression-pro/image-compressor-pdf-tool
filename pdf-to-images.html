@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PDF to Images Converter | Image Compression Pro</title>
+  <meta name="description" content="Convert PDF pages to images online for free. Fast, secure, no upload required.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+
+<body style="margin:0;font-family:Arial;background:#f4f6f8;">
+
+<!-- NAVIGATION -->
+<nav style="background:#222;padding:12px;text-align:center;">
+  <a href="index.html" style="color:#fff;margin:0 10px;">Compress Image</a>
+  <a href="image-resizer.html" style="color:#fff;margin:0 10px;">Image Resizer</a>
+  <a href="image-format-converter.html" style="color:#fff;margin:0 10px;">Image Converter</a>
+  <a href="pdf-to-images.html" style="color:#4caf50;margin:0 10px;">PDF to Images</a>
+</nav>
+
+<div style="max-width:800px;margin:auto;padding:20px;">
+
+<h1>PDF to Images Converter</h1>
+<p>Convert PDF pages into high-quality images instantly.</p>
+
+<div style="background:#fff;padding:20px;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,0.1);">
+
+<input type="file" id="pdfInput" accept="application/pdf"><br><br>
+
+<button onclick="convertPDF()" style="padding:12px 18px;background:#4caf50;color:#fff;border:none;cursor:pointer;">
+Convert PDF to Images
+</button>
+
+<p id="status"></p>
+<div id="output"></div>
+
+</div>
+
+<!-- SEO CONTENT -->
+<section style="margin-top:40px;line-height:1.6;">
+<h2>Free Online PDF to Image Converter</h2>
+<p>
+Image Compression Pro provides a fast and free PDF to image converter tool.
+You can convert each page of a PDF document into high-quality images without uploading files to any server.
+</p>
+
+<h3>How PDF to Image Conversion Works</h3>
+<p>
+Upload your PDF file and click convert. Each page of the PDF will be rendered as an image directly in your browser.
+Your files remain private and secure.
+</p>
+
+<h3>Why Use Our PDF to Images Tool?</h3>
+<ul>
+  <li>Convert PDF pages to images for free</li>
+  <li>No registration required</li>
+  <li>Secure client-side processing</li>
+  <li>Works on mobile and desktop</li>
+</ul>
+</section>
+
+</div>
+
+<footer style="text-align:center;padding:15px;background:#222;color:#ccc;">
+  <a href="about.html" style="color:#ccc;">About</a> |
+  <a href="privacy.html" style="color:#ccc;">Privacy Policy</a> |
+  <a href="contact.html" style="color:#ccc;">Contact</a>
+</footer>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+async function convertPDF(){
+  const file = document.getElementById("pdfInput").files[0];
+  if(!file) return alert("Please select a PDF file");
+
+  document.getElementById("status").textContent = "Converting...";
+  const output = document.getElementById("output");
+  output.innerHTML = "";
+
+  const pdfData = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({data: pdfData}).promise;
+
+  for(let i = 1; i <= pdf.numPages; i++){
+    const page = await pdf.getPage(i);
+    const viewport = page.getViewport({scale: 1.5});
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+
+    await page.render({canvasContext: ctx, viewport}).promise;
+
+    const img = document.createElement("img");
+    img.src = canvas.toDataURL("image/png");
+    img.style.maxWidth = "100%";
+    img.style.marginBottom = "15px";
+
+    const link = document.createElement("a");
+    link.href = img.src;
+    link.download = `page-${i}.png`;
+    link.textContent = `⬇ Download Page ${i}`;
+    link.style.display = "block";
+    link.style.marginBottom = "25px";
+
+    output.appendChild(img);
+    output.appendChild(link);
+  }
+
+  document.getElementById("status").textContent =
+    `Converted ${pdf.numPages} pages successfully`;
+}
+</script>
+
+</body>
+</html>
