@@ -1,250 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Image Compressor & PDF Converter | Free Online Tool</title>
 
-  <!-- SEO META TAGS -->
-  <title>Online Image Compressor & PDF Converter Tool</title>
-  <meta name="description" content="Free online image compression and image to PDF converter tool. Compress images without losing quality and convert images to PDF instantly.">
-  <meta name="keywords" content="image compressor, compress image online, image to pdf, pdf converter, optimize images">
+  <!-- SEO -->
+  <meta name="description" content="Compress images, batch optimize photos, convert images to PDF online. Fast, free, responsive & SEO optimized.">
+  <meta name="keywords" content="image compressor, batch image compression, image to pdf, online image optimizer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
 
-  <!-- PERFORMANCE -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-  <!-- GOOGLE ADSENSE (Replace AD_CLIENT_ID) -->
+  <!-- AdSense (replace IDs later) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 
-  <!-- jsPDF CDN -->
+  <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+:root {
+  --bg1:#6a11cb; --bg2:#2575fc;
+  --card:rgba(255,255,255,.15);
+  --text:#fff;
+}
+body.light {
+  --bg1:#f4f7fb; --bg2:#dfe7f1;
+  --card:#ffffff;
+  --text:#222;
 }
 
-body {
-  margin: 0;
-  background: #f4f6f8;
-  color: #333;
+*{box-sizing:border-box;font-family:system-ui,sans-serif}
+body{
+  margin:0;min-height:100vh;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text);transition:.3s;
 }
+header{text-align:center;padding:30px 15px}
+header h1{font-size:clamp(26px,5vw,42px)}
+.toggle{
+  position:fixed;top:15px;right:15px;
+  background:#0003;border-radius:20px;padding:8px 14px;
+  cursor:pointer;font-size:14px
+}
+.container{
+  max-width:1200px;margin:auto;padding:20px;
+  display:grid;grid-template-columns:3fr 1fr;gap:20px
+}
+@media(max-width:900px){.container{grid-template-columns:1fr}}
 
-header {
-  background: #1e88e5;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
+.card{
+  background:var(--card);backdrop-filter:blur(14px);
+  border-radius:18px;padding:22px;
+  box-shadow:0 20px 40px #0003;margin-bottom:20px
 }
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 15px;
+h2{margin:0 0 15px}
+.drop{
+  border:2px dashed #fff5;border-radius:14px;
+  padding:30px;text-align:center;cursor:pointer
 }
-
-.main {
-  flex: 3;
-  padding: 15px;
+input[type=file]{display:none}
+input[type=range]{width:100%}
+button{
+  width:100%;margin-top:10px;padding:14px;
+  border:none;border-radius:14px;font-size:15px;
+  background:linear-gradient(135deg,#ff512f,#dd2476);
+  color:#fff;font-weight:600;cursor:pointer
 }
-
-.sidebar {
-  flex: 1;
-  padding: 15px;
-}
-
-.card {
-  background: #fff;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-
-input[type="file"] {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-input[type="range"] {
-  width: 100%;
-}
-
-button {
-  background: #1e88e5;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-button:hover {
-  background: #1565c0;
-}
-
-.ad-box {
-  background: #e0e0e0;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-}
-
-footer {
-  text-align: center;
-  padding: 15px;
-  background: #222;
-  color: #ccc;
-  font-size: 14px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-}
+button:hover{opacity:.9}
+.ad{background:#0002;padding:15px;border-radius:14px;text-align:center}
+footer{text-align:center;padding:15px;font-size:13px;opacity:.8}
+a{color:#ffeb3b}
 </style>
 </head>
 
 <body>
 
+<div class="toggle" onclick="toggleTheme()">🌙 / ☀</div>
+
 <header>
   <h1>Image Compressor & PDF Converter</h1>
-  <p>Compress images & convert them into PDF instantly</p>
+  <p>Batch Compress • Drag & Drop • Dark Mode • Free</p>
 </header>
-
-<!-- TOP AD -->
-<div class="ad-box">
-  <!-- AdSense Top Banner -->
-  <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
 
 <div class="container">
 
-  <!-- MAIN CONTENT -->
-  <div class="main">
+<main>
 
-    <!-- IMAGE COMPRESSION -->
-    <div class="card">
-      <h2>Image Compression Tool</h2>
-      <input type="file" id="imageInput" accept="image/*">
-      <label>Compression Level: <span id="qualityValue">70%</span></label>
-      <input type="range" min="10" max="100" value="70" id="qualityRange">
-      <button onclick="compressImage()">Compress Image</button>
-      <p id="result"></p>
-      <a id="downloadLink" style="display:none;" download="compressed.jpg">Download Compressed Image</a>
-    </div>
+<div class="ad">AdSense Banner</div>
 
-    <!-- IMAGE TO PDF -->
-    <div class="card">
-      <h2>Image to PDF Converter</h2>
-      <input type="file" id="pdfImages" accept="image/*" multiple>
-      <button onclick="convertToPDF()">Convert to PDF</button>
-    </div>
+<div class="card">
+<h2>🖼 Batch Image Compression</h2>
 
-    <!-- BOTTOM AD -->
-    <div class="ad-box">
-      <!-- AdSense Bottom Banner -->
-      <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-         data-ad-slot="0987654321"
-         data-ad-format="auto"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+<label class="drop" id="dropBox">
+  Drag & Drop Images Here<br>or Click to Upload
+  <input type="file" id="images" multiple accept="image/*">
+</label>
 
-  </div>
+<label>Compression Level: <b><span id="qv">70%</span></b></label>
+<input type="range" id="qr" min="10" max="100" value="70">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="ad-box">
-      <!-- Sidebar Ad -->
-      <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-         data-ad-slot="1122334455"
-         data-ad-format="auto"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-  </aside>
+<button onclick="compressAll()">Compress & Download ZIP</button>
+<p id="info"></p>
+</div>
+
+<div class="card">
+<h2>📄 Image to PDF</h2>
+<input type="file" id="pdfImgs" multiple accept="image/*" style="display:block">
+<button onclick="toPDF()">Convert to PDF</button>
+</div>
+
+<div class="ad">AdSense Banner</div>
+
+</main>
+
+<aside>
+<div class="ad">Sidebar Ad</div>
+</aside>
 
 </div>
 
-<footer>
-  © 2026 Image Compressor Tool | Fast • Secure • SEO Optimized
-</footer>
+<footer>© 2026 Image Tools • GitHub Pages Ready</footer>
 
 <script>
-const qualityRange = document.getElementById("qualityRange");
-const qualityValue = document.getElementById("qualityValue");
+const qr=document.getElementById("qr"),qv=document.getElementById("qv");
+qr.oninput=()=>qv.textContent=qr.value+"%";
 
-qualityRange.oninput = () => {
-  qualityValue.textContent = qualityRange.value + "%";
-};
+function toggleTheme(){
+ document.body.classList.toggle("light");
+ localStorage.theme=document.body.classList.contains("light");
+}
+if(localStorage.theme==="true")document.body.classList.add("light");
 
-function compressImage() {
-  const file = document.getElementById("imageInput").files[0];
-  if (!file) return alert("Please select an image");
-
-  const img = new Image();
-  const reader = new FileReader();
-
-  reader.onload = e => img.src = e.target.result;
-  reader.readAsDataURL(file);
-
-  img.onload = () => {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img, 0, 0);
-
-    const quality = qualityRange.value / 100;
-    canvas.toBlob(blob => {
-      const url = URL.createObjectURL(blob);
-      const link = document.getElementById("downloadLink");
-      link.href = url;
-      link.style.display = "inline-block";
-      document.getElementById("result").textContent =
-        `Original: ${(file.size/1024).toFixed(2)} KB | Compressed: ${(blob.size/1024).toFixed(2)} KB`;
-    }, "image/jpeg", quality);
-  };
+// Drag Drop
+dropBox.onclick=()=>images.click();
+dropBox.ondragover=e=>{e.preventDefault();dropBox.style.opacity=.7}
+dropBox.ondragleave=()=>dropBox.style.opacity=1;
+dropBox.ondrop=e=>{
+ e.preventDefault();images.files=e.dataTransfer.files;dropBox.style.opacity=1;
 }
 
-async function convertToPDF() {
-  const files = document.getElementById("pdfImages").files;
-  if (files.length === 0) return alert("Select images");
-
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
-
-  for (let i = 0; i < files.length; i++) {
-    const imgData = await fileToDataURL(files[i]);
-    if (i > 0) pdf.addPage();
-    pdf.addImage(imgData, "JPEG", 10, 10, 190, 260);
-  }
-
-  pdf.save("images.pdf");
+// Compression
+async function compressAll(){
+ const files=images.files;if(!files.length)return alert("Select images");
+ const zip=new JSZip();let total=0;
+ for(const f of files){
+  const img=await loadImg(f);
+  const c=document.createElement("canvas");
+  c.width=img.width;c.height=img.height;
+  c.getContext("2d").drawImage(img,0,0);
+  const blob=await new Promise(r=>c.toBlob(r,"image/jpeg",qr.value/100));
+  zip.file("compressed_"+f.name,blob);total++;
+ }
+ zip.generateAsync({type:"blob"}).then(b=>{
+  download(b,"compressed_images.zip");
+  info.textContent=`${total} images compressed`;
+ });
 }
 
-function fileToDataURL(file) {
-  return new Promise(resolve => {
-    const reader = new FileReader();
-    reader.onload = e => resolve(e.target.result);
-    reader.readAsDataURL(file);
-  });
+function loadImg(f){
+ return new Promise(r=>{
+  const i=new Image();
+  i.onload=()=>r(i);
+  i.src=URL.createObjectURL(f);
+ });
+}
+function download(b,n){
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(b);a.download=n;a.click();
+}
+
+// PDF
+async function toPDF(){
+ const f=pdfImgs.files;if(!f.length)return alert("Select images");
+ const {jsPDF}=window.jspdf;const pdf=new jsPDF();
+ for(let i=0;i<f.length;i++){
+  const d=await fileToDataURL(f[i]);
+  if(i)pdf.addPage();
+  pdf.addImage(d,"JPEG",10,10,190,260);
+ }
+ pdf.save("images.pdf");
+}
+function fileToDataURL(f){
+ return new Promise(r=>{
+  const fr=new FileReader();
+  fr.onload=e=>r(e.target.result);
+  fr.readAsDataURL(f);
+ });
 }
 </script>
+
+<!-- ZIP Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 </body>
 </html>
