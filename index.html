@@ -158,7 +158,8 @@ a{color:#ffeb3b}
 .open-tool-btn {
   display: block;
   width: 100%;
-  margin-top: 14px;
+  max-width: 280px;     /* MEDIUM SIZE */
+  margin: 14px auto 0; /* centers the button */
   padding: 14px;
   text-align: center;
   border-radius: 14px;
@@ -167,6 +168,11 @@ a{color:#ffeb3b}
   background: linear-gradient(135deg, #ff512f, #dd2476);
   color: #ffffff;
   text-decoration: none;
+}
+.open-tool-btn:hover {
+  opacity: 0.9;
+}
+
 }
 
 }
