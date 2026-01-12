@@ -32,7 +32,7 @@
   --bg2:#243b55;
   --card:rgba(255,255,255,.12);
   --text:#f8fafc;
-}
+
 
 }
 body.light {
@@ -70,9 +70,19 @@ header h1{font-size:clamp(26px,5vw,42px)}
  
 
 }
+  .card {
+  text-align: center;
+}
+
+.card .open-tool-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+}
+
 h2{margin:0 0 15px}
 
-}
+
 .drop input[type=file] {
   display: none;
 }
@@ -103,21 +113,9 @@ a{color:#ffeb3b}
   margin-bottom: 15px;
   line-height: 1.6;
 }
-.open-tool-btn {
-  display: block;
-  width: 100%;
-  margin-top: 10px;
-  padding: 14px;
-  text-align: center;
-  border-radius: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  background: linear-gradient(135deg,#ff512f,#dd2476);
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
+
  
-}
+
 
 .open-tool-btn:hover {
   opacity: 0.9;
