@@ -199,6 +199,40 @@ a{color:#ffeb3b}
   <a href="image-format-converter.html" style="margin:0 10px; font-weight:600;">Image Converter</a> |
   <a href="pdf-to-images.html" style="margin:0 10px; font-weight:600;">PDF to Images</a>
 </nav>
+<div class="card" id="image-compressor-tool">
+
+<h2>🖼 Batch Image Compression</h2>
+<div class="upload-wrap">
+
+
+<label class="drop" id="dropBox">
+ <div class="drop-text">
+  <strong>Drag & Drop Images Here</strong>
+  <span>or click to upload</span>
+</div>
+
+  <input type="file" id="images" multiple accept="image/*" hidden>
+
+  <script>
+document.getElementById("images").addEventListener("change", function () {
+  if (typeof gtag === "function") {
+    gtag('event', 'upload_click', {
+      event_category: 'interaction',
+      event_label: 'image_upload'
+    });
+  }
+});
+</script>
+
+</label>
+
+<label>Compression Level: <b><span id="qv">70%</span></b></label>
+<input type="range" id="qr" min="10" max="100" value="70">
+</div>
+
+<button onclick="compressAll()">Compress & Download ZIP</button>
+<p id="info"></p>
+</div>
 
 <div class="container"><!-- TOOL CARDS -->
 <section style="grid-column:1 / -1; margin-bottom:30px;">
@@ -309,40 +343,6 @@ a{color:#ffeb3b}
 
 <div class="ad">AdSense Banner</div>
 
-<div class="card" id="image-compressor-tool">
-
-<h2>🖼 Batch Image Compression</h2>
-<div class="upload-wrap">
-
-
-<label class="drop" id="dropBox">
- <div class="drop-text">
-  <strong>Drag & Drop Images Here</strong>
-  <span>or click to upload</span>
-</div>
-
-  <input type="file" id="images" multiple accept="image/*" hidden>
-
-  <script>
-document.getElementById("images").addEventListener("change", function () {
-  if (typeof gtag === "function") {
-    gtag('event', 'upload_click', {
-      event_category: 'interaction',
-      event_label: 'image_upload'
-    });
-  }
-});
-</script>
-
-</label>
-
-<label>Compression Level: <b><span id="qv">70%</span></b></label>
-<input type="range" id="qr" min="10" max="100" value="70">
-</div>
-
-<button onclick="compressAll()">Compress & Download ZIP</button>
-<p id="info"></p>
-</div>
 
 <div class="card">
 <h2>📄 Image to PDF</h2>
