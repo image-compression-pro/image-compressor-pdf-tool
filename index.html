@@ -247,11 +247,42 @@ Your images remain private because everything runs in your browser.
 </p>
 
 <h2>Try the Image Compression Tool Below</h2>
+<div class="card" id="image-compressor-tool">
+
+  <h2>🖼 Batch Image Compression</h2>
+
+  <div class="upload-wrap">
+
+    <label class="drop" id="dropBox">
+      <div class="drop-text">
+        <strong>Drag & Drop Images Here</strong>
+        <span>or click to upload</span>
+      </div>
+      <input type="file" id="images" multiple accept="image/*" hidden>
+    </label>
+
+    <label>Compression Level: <b><span id="qv">70%</span></b></label>
+    <input type="range" id="qr" min="10" max="100" value="70">
+
+    <button onclick="compressAll()">Compress & Download ZIP</button>
+
+    <div id="preview" style="
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(80px,1fr));
+      gap:10px;
+      margin-top:15px;
+    "></div>
+
+    <p id="info"></p>
+
+  </div>
+</div>
 
 </section>
 
 
   <div class="card" style="margin-top:20px;">
+    
   <h3>🔒 Trusted & Secure</h3>
   <ul style="line-height:1.8; font-size:15px;">
     <li>✅ No images are uploaded to any server</li>
@@ -265,21 +296,7 @@ Your images remain private because everything runs in your browser.
 
   </div>
 
-  <section style="max-width:1200px;margin:60px auto;padding:20px;">
-  <h2>Free Online Image Compression Tool</h2>
-
-  <p>
-    Image Compression Pro is a free online image compressor that helps reduce image
-    file size without losing quality. You can compress JPG, PNG, and other images
-    directly in your browser with no uploads.
-  </p>
-
-  <p>
-    This tool is useful for students, bloggers, developers, and website owners who
-    want faster websites, smaller image sizes, and better performance.
-  </p>
-</section>
-
+  
   <section class="faq-section">
   <h2>Frequently Asked Questions</h2>
 
