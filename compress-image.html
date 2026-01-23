@@ -12,41 +12,83 @@ body{
   background:linear-gradient(135deg,#141e30,#243b55);
   color:#fff;
 }
+
+/* HEADER */
 header{
   text-align:center;
-  padding:40px 20px;
+  padding:50px 20px 30px;
 }
+header h1{
+  margin-bottom:10px;
+}
+header p{
+  opacity:0.85;
+}
+
+/* CONTAINER */
 .container{
   max-width:900px;
-  margin:40px auto;
+  margin:0 auto 80px;
   padding:20px;
 }
+
+/* TOOL CARD */
 .card{
   background:rgba(255,255,255,0.12);
-  padding:30px;
-  border-radius:18px;
-  margin: 40px auto;
-text-align: center;
-
-}
-.drop{
-  border:2px dashed rgba(255,255,255,0.4);
-  border-radius:16px;
   padding:40px;
+  border-radius:22px;
+  text-align:center;
+}
+
+/* DROP AREA */
+.drop{
+  border:2px dashed rgba(255,255,255,0.45);
+  border-radius:18px;
+  padding:50px 20px;
   text-align:center;
   cursor:pointer;
+  margin-bottom:25px;
+  width:100%;
+  box-sizing:border-box;
 }
+.drop strong{
+  font-size:18px;
+}
+.drop span{
+  opacity:0.8;
+  font-size:14px;
+}
+
+/* RANGE */
+label{
+  display:block;
+  margin:18px 0 8px;
+}
+input[type=range]{
+  width:100%;
+  margin-bottom:22px;
+}
+
+/* BUTTON */
 button{
   width:100%;
-  padding:14px;
+  padding:16px;
   border:none;
-  border-radius:14px;
-  font-size:16px;
+  border-radius:16px;
+  font-size:17px;
   background:linear-gradient(135deg,#ff512f,#dd2476);
   color:#fff;
   cursor:pointer;
 }
-input[type=range]{width:100%}
+button:hover{
+  opacity:0.95;
+}
+
+/* INFO */
+#info{
+  margin-top:12px;
+  opacity:0.85;
+}
 </style>
 </head>
 
@@ -57,21 +99,26 @@ input[type=range]{width:100%}
   <p>Batch compress images directly in your browser</p>
 </header>
 
-<div class="container" style="display:flex; justify-content:center;">
+<div class="container">
 
-<div class="card" style="max-width:900px; width:100%;">
-
+  <div class="card">
 
     <label class="drop">
-     
+      <strong>Drag & Drop Images</strong><br>
+      <span>or click to upload</span>
       <input type="file" id="images" multiple accept="image/*" hidden>
     </label>
 
-    <label>Compression Level: <b><span id="qv">70%</span></b></label>
+    <label>
+      Compression Level:
+      <b><span id="qv">70%</span></b>
+    </label>
+
     <input type="range" id="qr" min="10" max="100" value="70"
       oninput="qv.innerText=this.value+'%'">
 
     <button onclick="compressAll()">Compress & Download ZIP</button>
+
     <p id="info"></p>
 
   </div>
@@ -85,3 +132,4 @@ function compressAll(){
 
 </body>
 </html>
+
