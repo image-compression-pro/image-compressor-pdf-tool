@@ -91,7 +91,7 @@ button{
 button:hover{opacity:.9}
 .ad{background:#0002;padding:15px;border-radius:14px;text-align:center}
 footer{text-align:center;padding:15px;font-size:13px;opacity:.8}
-a{color:#ffeb3b}
+
   /* FAQ Section Styling */
 .faq-section {
   max-width: 1200px;
@@ -178,6 +178,14 @@ a{color:#ffeb3b}
   opacity: 0.9;
 }
 
+/* Theme-based link colors */
+body:not(.light) a{
+  color:#ffeb3b; /* yellow for dark */
+}
+
+body.light a{
+  color:#2563eb; /* blue for white */
+}
 
 
 </style>
@@ -192,7 +200,8 @@ a{color:#ffeb3b}
 
 </head>
 
-<body>
+<body class="light">
+
 
 <div class="toggle" onclick="toggleTheme()">🌙 / ☀</div>
 
