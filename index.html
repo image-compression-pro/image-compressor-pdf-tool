@@ -41,7 +41,7 @@ body.light {
   --text:#1e293b;
 }
 
-}
+
 
 *{box-sizing:border-box;font-family:system-ui,sans-serif}
 body{
@@ -435,10 +435,35 @@ const qr=document.getElementById("qr"),qv=document.getElementById("qv");
 qr.oninput=()=>qv.textContent=qr.value+"%";
 
 function toggleTheme(){
- document.body.classList.toggle("light");
- localStorage.theme=document.body.classList.contains("light");
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")){
+    localStorage.setItem("theme","dark");
+  } else {
+    localStorage.setItem("theme","light");
+  }
 }
-if(localStorage.theme==="true")document.body.classList.add("light");
+// DEFAULT THEME (WHITE FIRST)
+(function(){
+  const savedTheme = localStorage.getItem("theme");
+
+  if(savedTheme === "dark"){
+    document.body.classList.add("dark");
+    document.body.classList.remove("light");
+  } else {
+    document.body.classList.remove("dark");
+    document.body.classList.add("light");
+  }
+})();
+
+(function(){
+  const savedTheme = localStorage.getItem("theme");
+  if(savedTheme === "dark"){
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
+})();
 
 // Drag Drop
 dropBox.onclick=()=>images.click();
